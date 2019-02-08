@@ -1,7 +1,7 @@
 body {
   margin: 0;
   min-width: 1511px;
-  background-color: black;
+  background-color: #EAEDF1;
 }
 
 .wrapper {
@@ -24,7 +24,8 @@ body {
 
 .header .layout-column {
   min-height: 50px;
-  background-color: rgba(192, 57, 43, 0.9);
+  background-color: #FFFFFF;
+  border-radius: 4px;
 }
 
 .header .layout-column-1 {
@@ -47,7 +48,6 @@ body {
 .features .layout-column {
   float: left;
   margin-right: 6px;
-  background-color: green;
 }
 
 .features .layout-column-1 {
@@ -57,7 +57,7 @@ body {
 
 .features .layout-column-1 .item {
   width:100%;
-  background-color: white;
+  background-color: #FFFFFF;
   margin-bottom: 32px;
 }
 
@@ -79,8 +79,96 @@ body {
 
 .features .layout-column-2 {
   width: 72px;
-  height: 1180px;
+  height: 1173px;
   margin-right: 0px;
+}
+
+.features .layout-column-2 .center{
+  width: 6px;
+  height: 1173px;
+  float:left;
+  margin-left:32px;
+  background-color: #DBE1E8;
+}
+
+.features .layout-column-2 .year{
+  width: 100%;
+  height: 34px;
+  float:left;
+  background-color: #DBE1E8;
+  position: relative;
+  top:-34px;
+  border-radius: 4px;
+}
+
+.features .layout-column-2 .round{
+  width: 21px;
+  height: 21px;
+  float:left;
+  position: relative;
+  border-radius: 50%;
+}
+
+.features .layout-column-2 .round-grey{
+  background-color: #DBE1E8;
+}
+
+.features .layout-column-2 .round-white{
+  background-color: #FFFFFF;
+}
+
+.features .layout-column-2 .round-1
+{
+ top:-947px;
+ left:24px
+}
+
+.features .layout-column-2 .round-2
+{
+ top:-744px;
+ left:3px
+}
+
+.features .layout-column-2 .round-3
+{
+ top:-544px;
+ left:-18px
+}
+
+.features .layout-column-2 .round-4
+{
+ top:-344px;
+ left:24px
+}
+
+.features .layout-column-2 .round-5
+{
+ top:-185px;
+ left:3px
+}
+
+.features .layout-column-2 .round-6
+{
+ top:-229px;
+ left:-18px
+}
+
+.features .layout-column-2 .round-7
+{
+ top:-448px;
+ left:24px
+}
+
+.features .layout-column-2 .round-8
+{
+ top:-727px;
+ left:3px
+}
+
+.features .layout-column-2 .round-9
+{
+ top:-1090px;
+ left:-18px
 }
 
 .features .layout-column-3 {
@@ -90,22 +178,29 @@ body {
   height: 1164px;
 }
 
+.features .item
+{
+border-radius: 4px;
+}
 
 .features .layout-column-3 .item {
   width:100%;
-  background-color: white;
+  background-color: #DBE1E8;
   margin-bottom: 32px;
 }
 
 .features .layout-column-3 .item-1 {
   height: 405px;
-  border-bottom: 3px dotted black;
+  border-bottom: 3px dotted #DBE1E8;
+  border-radius: 0px;
+  background-color: #EAEDF1;
 }
 
 .features .layout-column-3 .item-1 .post {
   width:100%;
   height: 170px;
-  background-color: blue;
+  background-color: #DBE1E8;
+  border-radius: 4px;
 }
 
 .features .layout-column-3 .item-1 .post-1 {
@@ -123,6 +218,7 @@ body {
 
 .features .layout-column-3 .item-4 {
   height: 402px;
+  background-color: #FFFFFF;
 }
 
 .footer {
