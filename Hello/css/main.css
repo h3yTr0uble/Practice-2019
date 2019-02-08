@@ -106,12 +106,29 @@ body {
   line-height: 60px;
 }
 
+.features .layout-column-1 ul{
+  position: relative;
+  font-family: 'Lato', sans-serif;
+  list-style-image:url('../img/marker.png');
+  top:-45px;
+  left:15px;
+  font-size:16px;
+}
+
+.features .layout-column-1 .item-2 ul{
+  top:-59px;
+}
+
+.features .layout-column-1 ul li{
+  margin-bottom:10px;
+}
+
 .features .layout-column-1 .item .tags-1 {
-  top: 110px;
+  top: -29px;
 }
 
 .features .layout-column-1 .item .tags-2 {
-  top: 93px;
+  top: -45px;
   left:2px;
 }
 
