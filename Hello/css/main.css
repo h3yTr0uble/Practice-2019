@@ -30,9 +30,102 @@ body {
 
 .header .layout-column-1 {
   float: left;
-  width: 435px;
+  width: 436px;
   height: 100%;
 }
+
+.header .layout-column-1 .title{
+  font-family: 'Signika', sans-serif;
+  color:#33495F;
+  font-size:30px;
+  position:relative;
+  top:-67px;
+  left:215px;
+}
+
+.header .layout-column-1 .comment{
+  font-family: 'Lado', sans-serif;
+  color:#727F8D;
+  font-size:17px;
+  position:relative;
+  top:-39px;
+  left:23px;
+}
+
+.header .layout-column-1 .avatar{
+  position:relative;
+  top:107px;
+  left:23px;
+  width:145px;
+  height:146px;
+  top:36px;
+  left:27px;
+}
+
+.header .layout-column-1 .icons{
+  width:100%;
+  position:relative;
+  height:80px;
+  top:35px;
+}
+
+.header .layout-column-1 .item{
+  width:109px;
+  height:100%;
+  display:inline-block;
+  margin-left:-4px;
+  color:#FFFFFF;
+  position:relative;
+  font-family: 'Signika', sans-serif;
+  text-align:center;
+}
+
+.header .layout-column-1 .item img{
+  display:inline-block;
+  position:relative;
+  top:18px;
+  left:0px;
+}
+
+.header .layout-column-1 .item .icon-1{
+  left:26px;
+}
+
+.header .layout-column-1 .item .icon-2{
+  left:40px;
+}
+
+.header .layout-column-1 .item .icon-3{
+  left:37px;
+}
+
+.header .layout-column-1 .item .icon-4{
+  left:15px;
+}
+
+.header .layout-column-1 .item span{
+  position:relative;
+  display:inline-block;
+  top:39px;
+  left:-11px;
+}
+
+ .header .layout-column-1 .item-1{
+background-color:#16C4EC;
+margin-left:0px;
+}
+
+.header .layout-column-1 .item-2{
+background-color:#FA5351;
+}
+
+.header .layout-column-1 .item-3{
+background-color:#10CDC1;
+}
+
+.header .layout-column-1 .item-4{
+background-color:#33495F;
+} 
 
 .header .layout-column-2 {
   float: right;
