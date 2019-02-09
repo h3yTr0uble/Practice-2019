@@ -616,6 +616,117 @@ background-color:#33495F;
   background-color: #FFFFFF;
 }
 
+.features .layout-column-3 .item-4 .icons{
+  width:100%;
+  height:140px;
+}
+
+.features .layout-column-3 .item-4 .icons .icon-box{
+  width:15%;
+  height:140px;
+  display:inline-block;
+  margin-right:5px;
+  text-align:center;
+}
+
+.features .layout-column-3 .item-4 .icons .icon-box:first-child{
+  margin-left:10px;
+}
+
+.features .layout-column-3 .item-4 .icons .icon{
+  width:75px;
+  height:75px;
+  border-radius:50%;
+  position:relative;
+  top:17px;
+  left:10px;
+}
+
+.features .layout-column-3 .item-4 .icons .icon-green{
+  background-color:#10CDC1;
+}
+
+.features .layout-column-3 .item-4 .icons .icon-blue{
+  background-color:#16C4EC;
+}
+
+.features .layout-column-3 .item-4 .icons .icon-red{
+  background-color:#FA5351;
+}
+
+.features .layout-column-3 .item-4 .icons .icon-box span{
+  font-family: 'Signika', sans-serif;
+  color: #57697B;
+  font-size: 15px;
+  position: relative;
+  top: 26px;
+}
+
+.features .layout-column-3 .item-4 .icons .icon-box img{
+  position: relative;
+  top: 19px;
+}
+
+.features .layout-column-3 .item-4 .progress-bars{
+  width:100%;
+  height:262px;
+ 
+}
+
+
+
+.features .layout-column-3 .item-4 .progress-bars .column{
+  width:49%;
+  height:262px;
+  display:inline-block;
+  margin:0;
+  padding:0;
+  position:relative;
+  top:-31px;
+}
+
+.features .layout-column-3 .item-4 .progress-bars .column-2{
+  left:10px;
+}
+
+
+.features .layout-column-3 .item-4 .progress-bars .column span{
+  font-family: 'Signika', sans-serif;
+  color: #57697B;
+  font-size: 17px;
+  position: relative;
+  display:block;
+  top:55px;
+  left:20px;
+}
+
+.features .layout-column-3 .item-4 .progress-bars .column progress{
+  position:relative;
+  left:20px;
+  top:56px;
+  margin-bottom:19px;
+}
+
+progress {
+  border:0;
+  width: 268px;
+  height: 14px;
+  border-radius: 7px;
+  background: #DBE1E8;
+}
+progress::-webkit-progress-bar {
+  border-radius: 7px;
+  background: #DBE1E8;
+}
+progress::-webkit-progress-value {
+  border-radius: 7px 0 0 7px;
+  background: #10CDC1;
+}
+
+.features .layout-column-3 .item-4 .progress-bars .column-2 progress::-webkit-progress-value {
+  background: #16C4EC;
+}
+
 .footer {
   min-height: 120px;
   color: white;
