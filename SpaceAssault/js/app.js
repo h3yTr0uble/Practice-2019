@@ -433,8 +433,8 @@ function reset() {
     megaliths = [];
 
     player.pos = [50, canvas.height / 2];
-    var min = 15;
-    var max = 15;
+    var min = 4;
+    var max = 8;
 
     var countMegaliths = Math.floor(Math.random() * (max - min + 1)) + min;
 
