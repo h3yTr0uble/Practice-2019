@@ -9,11 +9,23 @@
         this.url = url;
         this.dir = dir || 'horizontal';
         this.once = once;
+        this.touch=false;
     };
 
     Sprite.prototype = {
         update: function(dt) {
             this._index += this.speed*dt;
+        },
+
+        changeSettings: function(frames) {
+            this._index=0;
+            this.frames = frames;
+            this.once=true;
+            this.touch=true;
+        },
+
+        getTouch: function() {
+           return this.touch;
         },
 
         render: function(ctx) {

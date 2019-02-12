@@ -27,10 +27,23 @@ canvas {
     color: #757575;
 }
 
-#score {
+#score{
     float: right;
     color: white;
     font-size: 2em;
+    display: block;
+}
+
+.mannaBox{
+    color: white;
+    font-size: 2em;
+    display: block;
+    clear: both;
+    text-align: center;
+}
+
+#scoreManna{
+    display: inline;
 }
 
 .key {
