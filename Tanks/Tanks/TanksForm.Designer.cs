@@ -28,18 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.map = new System.Windows.Forms.PictureBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnStartGame = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.ctlScore = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
+            this.GameStep = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.map)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // map
             // 
+            this.map.BackColor = System.Drawing.Color.Black;
             this.map.Location = new System.Drawing.Point(12, 12);
             this.map.Name = "map";
             this.map.Size = new System.Drawing.Size(500, 500);
@@ -47,14 +50,15 @@
             this.map.TabIndex = 0;
             this.map.TabStop = false;
             // 
-            // button1
+            // btnStartGame
             // 
-            this.button1.Location = new System.Drawing.Point(728, 173);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(217, 51);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnStartGame.Location = new System.Drawing.Point(728, 173);
+            this.btnStartGame.Name = "btnStartGame";
+            this.btnStartGame.Size = new System.Drawing.Size(217, 51);
+            this.btnStartGame.TabIndex = 1;
+            this.btnStartGame.Text = "button1";
+            this.btnStartGame.UseVisualStyleBackColor = true;
+            this.btnStartGame.Click += new System.EventHandler(this.btnStartGame_Click);
             // 
             // panel1
             // 
@@ -93,6 +97,11 @@
             this.button2.Text = "button2";
             this.button2.UseVisualStyleBackColor = true;
             // 
+            // GameStep
+            // 
+            this.GameStep.Interval = 300;
+            this.GameStep.Tick += new System.EventHandler(this.GameStep_Tick);
+            // 
             // TanksForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -100,11 +109,14 @@
             this.ClientSize = new System.Drawing.Size(1012, 682);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnStartGame);
             this.Controls.Add(this.map);
+            this.KeyPreview = true;
             this.Name = "TanksForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Tanks";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TanksForm_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.map)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -114,13 +126,13 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.PictureBox map;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnStartGame;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label ctlScore;
         private System.Windows.Forms.Label label1;
+        public System.Windows.Forms.PictureBox map;
+        public System.Windows.Forms.Timer GameStep;
     }
 }
 

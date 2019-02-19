@@ -15,6 +15,7 @@ namespace Tanks
     {
         public static Random rnd = new Random();
         public static int sizeCell = 25;
+        private Game newGame = new Game();
 
         public TanksForm()
         {
@@ -25,18 +26,26 @@ namespace Tanks
         {
             map.Width = 500;
             map.Height = 500;
-            //Bitmap backgroundMap = new Bitmap(map.Width, map.Height);
-            //Graphics mapGraphics = Graphics.FromImage(backgroundMap);
-            //mapGraphics.FillRectangle(Brushes.Black, 0, 0, map.Width, map.Height);
-            //for (int i = 0; i < 20; i++)
-            //{
-            //    mapGraphics.DrawImage(new Bitmap("wall1.png"), 0, i* sizeCell, sizeCell, sizeCell);
-            //    mapGraphics.DrawImage(new Bitmap("wall1.png"), 19 * sizeCell, i * sizeCell, sizeCell, sizeCell);
-            //    mapGraphics.DrawImage(new Bitmap("wall1.png"), i * sizeCell, 0, sizeCell, sizeCell);
-            //    mapGraphics.DrawImage(new Bitmap("wall1.png"), i * sizeCell, 19 * sizeCell, sizeCell, sizeCell);
-            //}
-            //map.Image = backgroundMap;
+
+           
         }
+
+        private void btnStartGame_Click(object sender, EventArgs e)
+        {
+            newGame.Start(this);
+            GameStep.Enabled = true;
+        }
+
+        private void GameStep_Tick(object sender, EventArgs e)
+        {
+            newGame.Step();
+        }
+
+        private void TanksForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            newGame.OnKeyPress(e.KeyCode);
+        }
+
 
     }
 }
