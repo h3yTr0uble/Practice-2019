@@ -16,13 +16,13 @@ namespace Tanks
     {
         private Bitmap backgroundMap;
         private Graphics mapGraphics;
-        private Kolobok kolobok;
+        public Kolobok kolobok { get; protected set; }
         private PictureBox map;
-        private List<Wall> Walls = new List<Wall>();
-        private List<Apple> Apples = new List<Apple>();
-        private List<Shot> ShotsKolobok = new List<Shot>();
-        private List<Shot> ShotsTanks = new List<Shot>();
-        private List<Tank> Tanks = new List<Tank>();
+        public List<Wall> Walls { get; protected set; } = new List<Wall>();
+        public List<Apple> Apples { get; protected set; } = new List<Apple>();
+        public List<Shot> ShotsKolobok { get; protected set; } = new List<Shot>();
+        public List<Shot> ShotsTanks { get; protected set; } = new List<Shot>();
+        public List<Tank> Tanks { get; protected set; } = new List<Tank>();
         public int Score { get; protected set; }
         public bool gameOver { get; protected set; } = false;
         public int Delta { get; protected set; } = 30;
@@ -54,6 +54,7 @@ namespace Tanks
             Tanks.Clear();
             Walls.Clear();
             ShotsKolobok.Clear();
+            ShotsTanks.Clear();
             kolobok = null;
             gameOver = false;
             Score = 0;
@@ -151,6 +152,11 @@ namespace Tanks
                     Move(ShotsKolobok[i], Delta);
                 }
 
+                for (int i = 0; i < ShotsTanks.Count; i++)
+                {
+                    Move(ShotsTanks[i], Delta);
+                }
+
                 Move(kolobok, Delta);
 
                 for (int i = 0; i < Tanks.Count; i++)
@@ -158,7 +164,6 @@ namespace Tanks
                     Move(Tanks[i], Delta);
                 }
 
-               
 
                 for (int i = 0; i < Apples.Count; i++)
                 {
@@ -175,56 +180,13 @@ namespace Tanks
             kolobok.Move(Walls);
             Delta = 5;
             Move(kolobok, Delta);
-            
 
-            for (int i = 0; i < Tanks.Count; i++)
+
+            for (int j = 0; j < ShotsTanks.Count; j++)
             {
-                if (Tanks[i].CollidesWith(kolobok))
+                if (kolobok.CollidesWith(ShotsTanks[j]))
                 {
                     gameOver = true;
-                    return;
-                }
-                for (int j = 0; j < ShotsKolobok.Count; j++)
-                {
-                    if (Tanks[i].CollidesWith(ShotsKolobok[j]))
-                    {
-                        mapGraphics.FillRectangle(Brushes.Black, Tanks[i].X * TanksForm.sizeCell, Tanks[i].Y * TanksForm.sizeCell, TanksForm.sizeCell, TanksForm.sizeCell);
-                        Tanks.RemoveAt(i);
-                        ShotsKolobok.RemoveAt(j);
-                        i--;
-                        j--;
-                    }
-                }
-            }
-
-            for (int i = 0; i < Tanks.Count; i++)
-            {
-                Tanks[i].Move(Walls, Tanks);
-                Move(Tanks[i], Delta);
-            }
-
-            for (int i = 0; i < ShotsKolobok.Count; i++)
-            {
-                ShotsKolobok[i].Move();
-                if (ShotsKolobok[i].CollidesWithWalls(Walls))
-                {
-                    mapGraphics.FillRectangle(Brushes.Black, ShotsKolobok[i].OldX * TanksForm.sizeCell, ShotsKolobok[i].OldY * TanksForm.sizeCell, TanksForm.sizeCell, TanksForm.sizeCell);
-                    ShotsKolobok.RemoveAt(i);
-                    i--;
-                }
-                
-            }
-
-
-            Delta += 5;
-            map.Image = backgroundMap;
-
-            for (int i = 0; i < Apples.Count; i++)
-            {
-                if (Apples[i].CollidesWith(kolobok))
-                {
-                    Apples.RemoveAt(i);
-                    Score++;
                     break;
                 }
             }
@@ -236,8 +198,100 @@ namespace Tanks
                     gameOver = true;
                     return;
                 }
+            }
+
+            for (int i = 0; i < Tanks.Count; i++)
+            {
+                Tanks[i].Move(Walls, Tanks);
+            }
+
+            for (int i = 0; i < Tanks.Count; i++)
+            {
+                for (int j = 0; j < ShotsKolobok.Count; j++)
+                {
+                    if (Tanks[i].CollidesWith(ShotsKolobok[j]))
+                    {
+                        mapGraphics.FillRectangle(Brushes.Black, Tanks[i].OldX * TanksForm.sizeCell, Tanks[i].OldY * TanksForm.sizeCell, TanksForm.sizeCell, TanksForm.sizeCell);
+                        mapGraphics.FillRectangle(Brushes.Black, ShotsKolobok[j].X * TanksForm.sizeCell, ShotsKolobok[j].Y * TanksForm.sizeCell, TanksForm.sizeCell, TanksForm.sizeCell);
+                        Tanks.RemoveAt(i);
+                        ShotsKolobok.RemoveAt(j);
+                        i--;
+                        j--;
+                        break;
+                    }
+                }
+            }
+
+            for (int i = 0; i < ShotsKolobok.Count; i++)
+            {
+                ShotsKolobok[i].Move();
+                if (ShotsKolobok[i].CollidesWithWalls(Walls))
+                {
+                    mapGraphics.FillRectangle(Brushes.Black, ShotsKolobok[i].OldX * TanksForm.sizeCell, ShotsKolobok[i].OldY * TanksForm.sizeCell, TanksForm.sizeCell, TanksForm.sizeCell);
+                    ShotsKolobok.RemoveAt(i);
+                    i--;
+                }
+            }
+
+            for (int i = 0; i < ShotsTanks.Count; i++)
+            {
+                ShotsTanks[i].Move();
+                if (ShotsTanks[i].CollidesWithWalls(Walls))
+                {
+                    mapGraphics.FillRectangle(Brushes.Black, ShotsTanks[i].OldX * TanksForm.sizeCell, ShotsTanks[i].OldY * TanksForm.sizeCell, TanksForm.sizeCell, TanksForm.sizeCell);
+                    ShotsTanks.RemoveAt(i);
+                    i--;
+                }
+            }
 
 
+            for (int j = 0; j < ShotsTanks.Count; j++)
+            {
+                if (kolobok.CollidesWith(ShotsTanks[j]))
+                {
+                    gameOver = true;
+                    break;
+                }
+            }
+
+            for (int i = 0; i < Tanks.Count; i++)
+            {
+                for (int j = 0; j < ShotsKolobok.Count; j++)
+                {
+                    if (Tanks[i].CollidesWith(ShotsKolobok[j]))
+                    {
+                        mapGraphics.FillRectangle(Brushes.Black, Tanks[i].OldX * TanksForm.sizeCell, Tanks[i].OldY * TanksForm.sizeCell, TanksForm.sizeCell, TanksForm.sizeCell);
+                        mapGraphics.FillRectangle(Brushes.Black, ShotsKolobok[j].OldX * TanksForm.sizeCell, ShotsKolobok[j].OldY * TanksForm.sizeCell, TanksForm.sizeCell, TanksForm.sizeCell);
+                        Tanks.RemoveAt(i);
+                        ShotsKolobok.RemoveAt(j);
+                        i--;
+                        j--;
+                        break;
+                    }
+                }
+            }
+
+           
+
+            for (int i = 0; i < Apples.Count; i++)
+            {
+                if (Apples[i].CollidesWith(kolobok))
+                {
+                    Apples.RemoveAt(i);
+                    Score++;
+                    break;
+                }
+            }
+            map.Image = backgroundMap;
+            for (int i = 0; i < Tanks.Count; i++)
+            {
+                if (Tanks[i].CollidesWith(kolobok))
+                {
+                    gameOver = true;
+                    return;
+                }
+
+                Move(Tanks[i], Delta);
             }
 
             SpawnApples();
@@ -245,6 +299,7 @@ namespace Tanks
             {
                 mapGraphics.DrawImage(Apples[i].Img, Apples[i].X * TanksForm.sizeCell, Apples[i].Y * TanksForm.sizeCell, TanksForm.sizeCell, TanksForm.sizeCell);
             }
+            Delta += 5;
             map.Image = backgroundMap;
         }
 
@@ -303,6 +358,10 @@ namespace Tanks
         {
             KeyPress += new KeyEventHandler(kolobok.OnKeyPress);
             kolobok.ShootOff += CreateShotKolobok;
+            for (int i = 0; i < Tanks.Count; i++)
+            {
+                Tanks[i].ShootOff += CreateShotTank;
+            }
         }
 
         public void UnSubscribe()
@@ -340,8 +399,53 @@ namespace Tanks
                 default:
                     break;
             }
-
+            for (int i = 0; i < ShotsKolobok.Count-1; i++)
+            {
+                if (ShotsKolobok.Last().CollidesWith(ShotsKolobok[i]))
+                {
+                    ShotsKolobok.RemoveAt(ShotsKolobok.Count - 1);
+                    return;
+                }
+            }
+            if (ShotsKolobok.Last().CollidesWithWalls(Walls))
+            {
+                ShotsKolobok.RemoveAt(ShotsKolobok.Count - 1);
+                return;
+            }
         }
 
+
+        public void CreateShotTank(MovebleObj sender)
+        {
+            switch (sender.DirectionTo)
+            {
+                case (int)Direction.Down:
+                    {
+                        ShotsTanks.Add(new Shot(sender.X, sender.Y + 1, sender.DirectionTo, sender));
+                        break;
+                    }
+                case (int)Direction.Left:
+                    {
+                        ShotsTanks.Add(new Shot(sender.X - 1, sender.Y, sender.DirectionTo, sender));
+                        break;
+                    }
+                case (int)Direction.Right:
+                    {
+                        ShotsTanks.Add(new Shot(sender.X + 1, sender.Y, sender.DirectionTo, sender));
+                        break;
+                    }
+                case (int)Direction.Up:
+                    {
+                        ShotsTanks.Add(new Shot(sender.X, sender.Y - 1, sender.DirectionTo, sender));
+                        break;
+                    }
+                default:
+                    break;
+            }
+            if (ShotsTanks.Last().CollidesWithWalls(Walls))
+            {
+                ShotsTanks.RemoveAt(ShotsTanks.Count - 1);
+            }
+        }
     }
 }

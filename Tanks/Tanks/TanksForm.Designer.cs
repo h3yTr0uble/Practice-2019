@@ -34,7 +34,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.ctlScore = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnStats = new System.Windows.Forms.Button();
             this.GameStep = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.map)).BeginInit();
             this.panel1.SuspendLayout();
@@ -93,16 +93,18 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Score:";
             // 
-            // button2
+            // btnStats
             // 
-            this.button2.Location = new System.Drawing.Point(536, 263);
-            this.button2.Margin = new System.Windows.Forms.Padding(6);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(267, 84);
-            this.button2.TabIndex = 3;
-            this.button2.TabStop = false;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnStats.Enabled = false;
+            this.btnStats.Location = new System.Drawing.Point(536, 263);
+            this.btnStats.Margin = new System.Windows.Forms.Padding(6);
+            this.btnStats.Name = "btnStats";
+            this.btnStats.Size = new System.Drawing.Size(267, 84);
+            this.btnStats.TabIndex = 3;
+            this.btnStats.TabStop = false;
+            this.btnStats.Text = "Stats";
+            this.btnStats.UseVisualStyleBackColor = true;
+            this.btnStats.Click += new System.EventHandler(this.btnStats_Click);
             // 
             // GameStep
             // 
@@ -115,7 +117,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(813, 548);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.btnStats);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnStartGame);
             this.Controls.Add(this.map);
@@ -138,7 +140,7 @@
         #endregion
         private System.Windows.Forms.Button btnStartGame;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnStats;
         private System.Windows.Forms.Label ctlScore;
         private System.Windows.Forms.Label label1;
         public System.Windows.Forms.PictureBox map;

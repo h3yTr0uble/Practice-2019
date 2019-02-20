@@ -19,12 +19,20 @@ namespace Tanks
         {
         }
 
+        public event CreateShot ShootOff;
+
         public void Move(List<Wall> Walls, List<Tank> Tanks)
         {
             if (rnd.NextDouble() < 0.3)
             {
                 IdentifyDirection(TanksForm.rnd.Next(0, 4));
             }
+
+            if (rnd.NextDouble() < 0.15)
+            {
+                ShootOff?.Invoke(this);
+            }
+
 
             switch (DirectionTo)
             {
