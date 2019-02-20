@@ -40,7 +40,7 @@ namespace Tanks
         {
             newGame.Step();
             ctlScore.Text = newGame.Score.ToString();
-            if (newGame.gameOver)
+            if (newGame.gameOver && newGame.Delta==30)
             {
                 GameStep.Enabled = false;
             }

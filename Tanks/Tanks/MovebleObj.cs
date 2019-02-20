@@ -8,7 +8,12 @@ namespace Tanks
 {
     public abstract class MovebleObj:Obj
     {
+        public int OldX { get; protected set; }
+        public int OldY { get; protected set; }
         public int DirectionTo { get; set; }
+
+        public delegate void CreateShot(MovebleObj sender);
+
         public MovebleObj() : base()
         {
             DirectionTo = TanksForm.rnd.Next(0, 4);
@@ -20,6 +25,13 @@ namespace Tanks
             DirectionTo = TanksForm.rnd.Next(0, 4);
             ChangePicture();
         }
+
+        public MovebleObj(int x, int y, int direction) : base(x, y)
+        {
+            DirectionTo = direction;
+            ChangePicture();
+        }
+
 
         public void IdentifyDirection(int direction)
         {
@@ -48,57 +60,10 @@ namespace Tanks
                 default:
                     break;
             }
-            ChangePicture();
+           
         }
 
-        public virtual void Move(List<Wall> Walls, List<Tank> Tanks)
-        {
-            switch (DirectionTo)
-            {
-                case (int)Direction.Down:
-                    {
-                        Y++;
-                        if (CollidesWithWalls(Walls))
-                        {
-                            Y--;
-                            IdentifyDirection((int)Direction.Up);
-                        }
-                        break;
-                    }
-                case (int)Direction.Left:
-                    {
-                        X--;
-                        if (CollidesWithWalls(Walls))
-                        {
-                            X++;
-                            IdentifyDirection((int)Direction.Right);
-                        }
-                        break;
-                    }
-                case (int)Direction.Right:
-                    {
-                        X++;
-                        if (CollidesWithWalls(Walls))
-                        {
-                            X--;
-                            IdentifyDirection((int)Direction.Left);
-                        }
-                        break;
-                    }
-                case (int)Direction.Up:
-                    {
-                        Y--;
-                        if (CollidesWithWalls(Walls))
-                        {
-                            Y++;
-                            IdentifyDirection((int)Direction.Down);
-                        }
-                        break;
-                    }
-                default:
-                    break;
-            }
-        }
+
 
         public bool CollidesWithWalls(List<Wall> Walls)
         {

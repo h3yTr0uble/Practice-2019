@@ -57,6 +57,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Shot.cs" />
     <Compile Include="Tank.cs" />
     <Compile Include="TanksForm.cs">
       <SubType>Form</SubType>
@@ -102,6 +103,10 @@
     <None Include="Images\tankRight.png" />
     <None Include="Images\tankUp.png" />
     <None Include="Images\gameOver.png" />
+    <None Include="Images\shotRight.png" />
+    <None Include="Images\shotDown.png" />
+    <None Include="Images\shotLeft.png" />
+    <None Include="Images\shotUp.png" />
     <Content Include="Images\wall.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -4,28 +4,39 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Tanks.Properties;
 
 namespace Tanks
 {
-    public class Tank: MovebleObj
+    public class Shot : MovebleObj
     {
-        private Random rnd = new Random();
-        public Tank() : base()
+        public MovebleObj Sender { get; protected set; }
+        public Shot() : base()
         {
         }
 
-        public Tank(int x, int y) : base(x, y)
+        public Shot(int x, int y) : base(x, y)
         {
+            OldX = x;
+            OldY = y;
         }
 
-        public void Move(List<Wall> Walls, List<Tank> Tanks)
+        public Shot(int x, int y, int direction) : base(x, y, direction)
         {
-            if (rnd.NextDouble() < 0.3)
-            {
-                IdentifyDirection(TanksForm.rnd.Next(0, 4));
-            }
+            OldX = x;
+            OldY = y;
+        }
 
+        public Shot(int x, int y, int direction, MovebleObj sender) : base(x, y, direction)
+        {
+            OldX = x;
+            OldY = y;
+            Sender = sender;
+        }
+
+        public void Move()
+        {
             switch (DirectionTo)
             {
                 case (int)Direction.Down:
@@ -33,11 +44,6 @@ namespace Tanks
                         OldY = Y;
                         OldX = X;
                         Y++;
-                        if (CollidesWithWalls(Walls) || CollidesWithTanks(Tanks))
-                        {
-                            Y--;
-                            IdentifyDirection((int)Direction.Up);
-                        }
                         break;
                     }
                 case (int)Direction.Left:
@@ -45,11 +51,6 @@ namespace Tanks
                         OldY = Y;
                         OldX = X;
                         X--;
-                        if (CollidesWithWalls(Walls) || CollidesWithTanks(Tanks))
-                        {
-                            X++;
-                            IdentifyDirection((int)Direction.Right);
-                        }
                         break;
                     }
                 case (int)Direction.Right:
@@ -57,11 +58,6 @@ namespace Tanks
                         OldY = Y;
                         OldX = X;
                         X++;
-                        if (CollidesWithWalls(Walls) || CollidesWithTanks(Tanks))
-                        {
-                            X--;
-                            IdentifyDirection((int)Direction.Left);
-                        }
                         break;
                     }
                 case (int)Direction.Up:
@@ -69,11 +65,6 @@ namespace Tanks
                         OldY = Y;
                         OldX = X;
                         Y--;
-                        if (CollidesWithWalls(Walls) || CollidesWithTanks(Tanks))
-                        {
-                            Y++;
-                            IdentifyDirection((int)Direction.Down);
-                        }
                         break;
                     }
                 default:
@@ -82,51 +73,39 @@ namespace Tanks
             ChangePicture();
         }
 
-
-        public bool CollidesWithTanks(List<Tank> Tanks)
-        {
-            for (int i = 0; i < Tanks.Count; i++)
-            {
-                if (CollidesWith(Tanks[i]) && this!=Tanks[i])
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-
         public override void ChangePicture()
         {
             if (Img == null)
             {
-                Img = new Bitmap(Resources.tankLeft);
+                Img = new Bitmap(Resources.shotRight);
             }
             switch (DirectionTo)
             {
                 case (int)Direction.Up:
                     {
-                        Img = Resources.tankUp;
+                        Img = Resources.shotUp;
                         break;
                     }
                 case ((int)Direction.Down):
                     {
-                        Img = Resources.tankDown;
+                        Img = Resources.shotDown;
                         break;
                     }
                 case (int)Direction.Right:
                     {
-                        Img = Resources.tankRight;
+                        Img = Resources.shotRight;
                         break;
                     }
                 case (int)Direction.Left:
                     {
-                        Img = Resources.tankLeft;
+                        Img = Resources.shotLeft;
                         break;
                     }
                 default:
                     break;
             }
         }
+
+       
     }
 }

@@ -18,7 +18,9 @@ namespace Tanks
         public Kolobok(int x, int y) : base(x, y)
         {
         }
-        
+
+
+        public event CreateShot ShootOff;
 
         public void OnKeyPress(object sender, KeyEventArgs e)
         {
@@ -50,12 +52,77 @@ namespace Tanks
                             ((Kolobok)sender).IdentifyDirection((int)Direction.Right);
                             break;
                         }
+                    case Keys.F:
+                        {
+                            ShootOff?.Invoke(this);
+                            break;
+                        }
                     default:
                         break;
                 }
 
                
             }
+        }
+
+
+
+        public void Move(List<Wall> Walls)
+        {
+            switch (DirectionTo)
+            {
+                case (int)Direction.Down:
+                    {
+                        OldY = Y;
+                        OldX = X;
+                        Y++;
+                        if (CollidesWithWalls(Walls))
+                        {
+                            Y--;
+                            IdentifyDirection((int)Direction.Up);
+                        }
+                        break;
+                    }
+                case (int)Direction.Left:
+                    {
+                        OldY = Y;
+                        OldX = X;
+                        X--;
+                        if (CollidesWithWalls(Walls))
+                        {
+                            X++;
+                            IdentifyDirection((int)Direction.Right);
+                        }
+                        break;
+                    }
+                case (int)Direction.Right:
+                    {
+                        OldY = Y;
+                        OldX = X;
+                        X++;
+                        if (CollidesWithWalls(Walls))
+                        {
+                            X--;
+                            IdentifyDirection((int)Direction.Left);
+                        }
+                        break;
+                    }
+                case (int)Direction.Up:
+                    {
+                        OldY = Y;
+                        OldX = X;
+                        Y--;
+                        if (CollidesWithWalls(Walls))
+                        {
+                            Y++;
+                            IdentifyDirection((int)Direction.Down);
+                        }
+                        break;
+                    }
+                default:
+                    break;
+            }
+            ChangePicture();
         }
 
 

@@ -44,7 +44,7 @@
             // 
             this.map.BackColor = System.Drawing.Color.Black;
             this.map.Location = new System.Drawing.Point(24, 23);
-            this.map.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.map.Margin = new System.Windows.Forms.Padding(6);
             this.map.Name = "map";
             this.map.Size = new System.Drawing.Size(500, 500);
             this.map.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -54,7 +54,7 @@
             // btnStartGame
             // 
             this.btnStartGame.Location = new System.Drawing.Point(536, 146);
-            this.btnStartGame.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnStartGame.Margin = new System.Windows.Forms.Padding(6);
             this.btnStartGame.Name = "btnStartGame";
             this.btnStartGame.Size = new System.Drawing.Size(267, 86);
             this.btnStartGame.TabIndex = 1;
@@ -69,7 +69,7 @@
             this.panel1.Controls.Add(this.ctlScore);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(536, 23);
-            this.panel1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.panel1.Margin = new System.Windows.Forms.Padding(6);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(267, 93);
             this.panel1.TabIndex = 2;
@@ -96,7 +96,7 @@
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(536, 263);
-            this.button2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.button2.Margin = new System.Windows.Forms.Padding(6);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(267, 84);
             this.button2.TabIndex = 3;
@@ -106,7 +106,7 @@
             // 
             // GameStep
             // 
-            this.GameStep.Interval = 300;
+            this.GameStep.Interval = 50;
             this.GameStep.Tick += new System.EventHandler(this.GameStep_Tick);
             // 
             // TanksForm
@@ -121,7 +121,7 @@
             this.Controls.Add(this.map);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.KeyPreview = true;
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "TanksForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Tanks";
