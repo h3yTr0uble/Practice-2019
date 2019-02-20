@@ -63,6 +63,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="SettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SettingsForm.Designer.cs">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Shot.cs" />
     <Compile Include="Tank.cs" />
     <Compile Include="TanksForm.cs">
@@ -78,6 +84,9 @@
     <Compile Include="Wall.cs" />
     <EmbeddedResource Include="AboutObjectsForm.resx">
       <DependentUpon>AboutObjectsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsForm.resx">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TanksForm.resx">
       <DependentUpon>TanksForm.cs</DependentUpon>

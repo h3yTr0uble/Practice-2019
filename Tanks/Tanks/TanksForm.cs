@@ -16,7 +16,7 @@ namespace Tanks
         public static Random rnd = new Random();
         public static int sizeCell = 25;
         private AboutObjectsForm form;
-        private Game newGame = new Game();
+        private Game newGame;
 
         public TanksForm()
         {
@@ -33,9 +33,34 @@ namespace Tanks
 
         private void btnStartGame_Click(object sender, EventArgs e)
         {
+            SettingsForm settings = new SettingsForm();
+            settings.ShowDialog();
+            if (settings.DialogResult==DialogResult.OK)
+            {
+                newGame = new Game(settings.ApplesCount, settings.TanksCount);
+                switch (settings.Speed)
+                {
+                    case 0: GameStep.Interval = 50;
+                        break;
+                    case 1:
+                        GameStep.Interval = 75;
+                        break;
+                    case 2:
+                        GameStep.Interval = 100;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                return;
+            }
             btnStats.Enabled = true;
             newGame.Start(this);
             GameStep.Enabled = true;
+            StatsStep.Interval = GameStep.Interval * 5;
+            StatsStep.Enabled = true;
         }
 
         private void GameStep_Tick(object sender, EventArgs e)
@@ -46,13 +71,7 @@ namespace Tanks
             {
                 GameStep.Enabled = false;
             }
-            if (form!=null)
-            {
-                if (!form.IsDisposed)
-                {
-                    RefreshStats();
-                }
-            }
+            
         }
 
         private void TanksForm_KeyDown(object sender, KeyEventArgs e)
@@ -90,6 +109,17 @@ namespace Tanks
             for (int i = 0; i < newGame.ShotsTanks.Count; i++)
             {
                 form.ctlAboutObjects.Rows.Add(newGame.ShotsTanks[i].GetType(), newGame.ShotsTanks[i].X, newGame.ShotsTanks[i].Y);
+            }
+        }
+
+        private void StatsStep_Tick(object sender, EventArgs e)
+        {
+            if (form != null)
+            {
+                if (!form.IsDisposed)
+                {
+                    RefreshStats();
+                }
             }
         }
     }

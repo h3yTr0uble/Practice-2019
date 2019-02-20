@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tanks.Properties;
 
@@ -23,6 +17,8 @@ namespace Tanks
         public List<Shot> ShotsKolobok { get; protected set; } = new List<Shot>();
         public List<Shot> ShotsTanks { get; protected set; } = new List<Shot>();
         public List<Tank> Tanks { get; protected set; } = new List<Tank>();
+        private int applesCount = 5;
+        private int tanksCount = 5;
         public int Score { get; protected set; }
         public bool gameOver { get; protected set; } = false;
         public int Delta { get; protected set; } = 30;
@@ -46,6 +42,14 @@ namespace Tanks
                                     "X       XXXX       X",
                                     "X                  X",
                                     "XXXXXXXXXXXXXXXXXXXX"};
+
+        public Game() { }
+
+        public Game(int applesCount, int tanksCount)
+        {
+            this.applesCount = applesCount;
+            this.tanksCount = tanksCount;
+        }
 
         public void Start(TanksForm fm)
         {
@@ -79,7 +83,7 @@ namespace Tanks
 
             SpawnApples();
 
-            while (Tanks.Count < 5)
+            while (Tanks.Count < tanksCount)
             {
                 Tanks.Add(new Tank());
                 foreach (var item in Walls)
@@ -97,7 +101,7 @@ namespace Tanks
                 mapGraphics.DrawImage(Apples[i].Img, Apples[i].X * TanksForm.sizeCell, Apples[i].Y * TanksForm.sizeCell, TanksForm.sizeCell, TanksForm.sizeCell);
             }
 
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < Tanks.Count; i++)
             {
                 mapGraphics.DrawImage(Tanks[i].Img, Tanks[i].X * TanksForm.sizeCell, Tanks[i].Y * TanksForm.sizeCell, TanksForm.sizeCell, TanksForm.sizeCell);
             }
@@ -119,7 +123,7 @@ namespace Tanks
 
         public void SpawnApples()
         {
-            while (Apples.Count < 5)
+            while (Apples.Count < applesCount)
             {
                 Apples.Add(new Apple());
                 foreach (var item in Walls)
@@ -169,14 +173,17 @@ namespace Tanks
                 {
                     mapGraphics.DrawImage(Apples[i].Img, Apples[i].X * TanksForm.sizeCell, Apples[i].Y * TanksForm.sizeCell, TanksForm.sizeCell, TanksForm.sizeCell);
                 }
+
                 if (gameOver)
                 {
                     GameOver();
                 }
+
                 Delta += 5;
                 map.Image = backgroundMap;
                 return;
             }
+
             kolobok.Move(Walls);
             Delta = 5;
             Move(kolobok, Delta);
@@ -198,15 +205,8 @@ namespace Tanks
                     gameOver = true;
                     return;
                 }
-            }
-
-            for (int i = 0; i < Tanks.Count; i++)
-            {
                 Tanks[i].Move(Walls, Tanks);
-            }
-
-            for (int i = 0; i < Tanks.Count; i++)
-            {
+                
                 for (int j = 0; j < ShotsKolobok.Count; j++)
                 {
                     if (Tanks[i].CollidesWith(ShotsKolobok[j]))
@@ -220,7 +220,16 @@ namespace Tanks
                         break;
                     }
                 }
+
+                
+                if (Tanks[i].CollidesWith(kolobok))
+                {
+                    gameOver = true;
+                    return;
+                }
+                Move(Tanks[i], Delta);
             }
+
 
             for (int i = 0; i < ShotsKolobok.Count; i++)
             {
@@ -241,18 +250,15 @@ namespace Tanks
                     mapGraphics.FillRectangle(Brushes.Black, ShotsTanks[i].OldX * TanksForm.sizeCell, ShotsTanks[i].OldY * TanksForm.sizeCell, TanksForm.sizeCell, TanksForm.sizeCell);
                     ShotsTanks.RemoveAt(i);
                     i--;
+                    continue;
                 }
-            }
-
-
-            for (int j = 0; j < ShotsTanks.Count; j++)
-            {
-                if (kolobok.CollidesWith(ShotsTanks[j]))
+                if (kolobok.CollidesWith(ShotsTanks[i]))
                 {
                     gameOver = true;
                     break;
                 }
             }
+
 
             for (int i = 0; i < Tanks.Count; i++)
             {
@@ -281,24 +287,10 @@ namespace Tanks
                     Score++;
                     break;
                 }
-            }
-            map.Image = backgroundMap;
-            for (int i = 0; i < Tanks.Count; i++)
-            {
-                if (Tanks[i].CollidesWith(kolobok))
-                {
-                    gameOver = true;
-                    return;
-                }
-
-                Move(Tanks[i], Delta);
+                mapGraphics.DrawImage(Apples[i].Img, Apples[i].X * TanksForm.sizeCell, Apples[i].Y * TanksForm.sizeCell, TanksForm.sizeCell, TanksForm.sizeCell);
             }
 
             SpawnApples();
-            for (int i = 0; i < Apples.Count; i++)
-            {
-                mapGraphics.DrawImage(Apples[i].Img, Apples[i].X * TanksForm.sizeCell, Apples[i].Y * TanksForm.sizeCell, TanksForm.sizeCell, TanksForm.sizeCell);
-            }
             Delta += 5;
             map.Image = backgroundMap;
         }

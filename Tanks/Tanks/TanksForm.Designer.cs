@@ -36,6 +36,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnStats = new System.Windows.Forms.Button();
             this.GameStep = new System.Windows.Forms.Timer(this.components);
+            this.StatsStep = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.map)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -111,6 +112,11 @@
             this.GameStep.Interval = 50;
             this.GameStep.Tick += new System.EventHandler(this.GameStep_Tick);
             // 
+            // StatsStep
+            // 
+            this.StatsStep.Interval = 1000;
+            this.StatsStep.Tick += new System.EventHandler(this.StatsStep_Tick);
+            // 
             // TanksForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
@@ -145,6 +151,7 @@
         private System.Windows.Forms.Label label1;
         public System.Windows.Forms.PictureBox map;
         public System.Windows.Forms.Timer GameStep;
+        private System.Windows.Forms.Timer StatsStep;
     }
 }
 
