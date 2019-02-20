@@ -48,7 +48,7 @@
     <Compile Include="Apple.cs" />
     <Compile Include="Direction.cs" />
     <Compile Include="Game.cs" />
-    <Compile Include="KolobokController.cs" />
+    <Compile Include="MovebleObj.cs" />
     <Compile Include="MVC\Controller.cs" />
     <Compile Include="MVC\Model.cs" />
     <Compile Include="MVC\View.cs" />
@@ -101,6 +101,7 @@
     <None Include="Images\tankLeft.png" />
     <None Include="Images\tankRight.png" />
     <None Include="Images\tankUp.png" />
+    <None Include="Images\gameOver.png" />
     <Content Include="Images\wall.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -39,13 +39,16 @@ namespace Tanks
         private void GameStep_Tick(object sender, EventArgs e)
         {
             newGame.Step();
+            ctlScore.Text = newGame.Score.ToString();
+            if (newGame.gameOver)
+            {
+                GameStep.Enabled = false;
+            }
         }
 
         private void TanksForm_KeyDown(object sender, KeyEventArgs e)
         {
             newGame.OnKeyPress(e.KeyCode);
         }
-
-
     }
 }

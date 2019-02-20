@@ -9,82 +9,16 @@ using Tanks.Properties;
 
 namespace Tanks
 {
-    public class Kolobok:Obj
+    public class Kolobok:MovebleObj
     {
-        public int DirectionTo { get; set; }
-        public int LastDirection { get; set; }
         public Kolobok():base()
         {
-            DirectionTo = TanksForm.rnd.Next(0, 4);
-            LastDirection = DirectionTo;
-            ChangePicture();
         }
 
         public Kolobok(int x, int y) : base(x, y)
         {
-            DirectionTo = TanksForm.rnd.Next(0, 4);
-            LastDirection = DirectionTo;
-            ChangePicture();
         }
-
-        public void IdentifyDirection(int direction)
-        {
-            LastDirection = DirectionTo;
-            switch (direction)
-            {
-                case (int)Direction.Down:
-                    {
-                        DirectionTo = (int)Direction.Down;
-                        break;
-                    }
-                case (int)Direction.Left:
-                    {
-                        DirectionTo = (int)Direction.Left;
-                        break;
-                    }
-                case (int)Direction.Right:
-                    {
-                        DirectionTo = (int)Direction.Right;
-                        break;
-                    }
-                case (int)Direction.Up:
-                    {
-                        DirectionTo = (int)Direction.Up;
-                        break;
-                    }
-                default:
-                    break;
-            }
-        }
-
-        public void Move()
-        {
-            switch (DirectionTo)
-            {
-                case (int)Direction.Down:
-                    {
-                        Y++;
-                        break;
-                    }
-                case (int)Direction.Left:
-                    {
-                        X--;
-                        break;
-                    }
-                case (int)Direction.Right:
-                    {
-                        X++;
-                        break;
-                    }
-                case (int)Direction.Up:
-                    {
-                        Y--;
-                        break;
-                    }
-                default:
-                    break;
-            }
-        }
+        
 
         public void OnKeyPress(object sender, KeyEventArgs e)
         {
@@ -120,12 +54,12 @@ namespace Tanks
                         break;
                 }
 
-                ChangePicture();
+               
             }
         }
 
 
-        public void ChangePicture()
+        public override void ChangePicture()
         {
             if (Img==null)
             {

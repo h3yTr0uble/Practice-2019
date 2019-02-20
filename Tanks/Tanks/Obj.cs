@@ -28,25 +28,13 @@ namespace Tanks
             Size = 25;
         }
 
-        protected bool CheckCollides(int x, int y)
-        {
-            if (X + TanksForm.sizeCell >= x && X <= x)
-            {
-                if (Y + TanksForm.sizeCell >= y && Y <= y)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
 
         public bool CollidesWith(Obj obj)
         {
-            if (CheckCollides(obj.X, obj.Y) ||
-                CheckCollides(obj.X + obj.Size, obj.Y) ||
-                CheckCollides(obj.X + obj.Size, obj.Y + obj.Size) ||
-                CheckCollides(obj.X, obj.Y + obj.Size))
+            if (X == obj.X && Y == obj.Y || X<0 || X>=20 || Y<0 || Y>=20)
+            {
                 return true;
+            }
 
             return false;
         }

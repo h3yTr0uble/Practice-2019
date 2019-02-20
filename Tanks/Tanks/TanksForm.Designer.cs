@@ -43,7 +43,8 @@
             // map
             // 
             this.map.BackColor = System.Drawing.Color.Black;
-            this.map.Location = new System.Drawing.Point(12, 12);
+            this.map.Location = new System.Drawing.Point(24, 23);
+            this.map.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.map.Name = "map";
             this.map.Size = new System.Drawing.Size(500, 500);
             this.map.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -52,11 +53,13 @@
             // 
             // btnStartGame
             // 
-            this.btnStartGame.Location = new System.Drawing.Point(728, 173);
+            this.btnStartGame.Location = new System.Drawing.Point(536, 146);
+            this.btnStartGame.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btnStartGame.Name = "btnStartGame";
-            this.btnStartGame.Size = new System.Drawing.Size(217, 51);
+            this.btnStartGame.Size = new System.Drawing.Size(267, 86);
             this.btnStartGame.TabIndex = 1;
-            this.btnStartGame.Text = "button1";
+            this.btnStartGame.TabStop = false;
+            this.btnStartGame.Text = "New Game";
             this.btnStartGame.UseVisualStyleBackColor = true;
             this.btnStartGame.Click += new System.EventHandler(this.btnStartGame_Click);
             // 
@@ -65,35 +68,39 @@
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel1.Controls.Add(this.ctlScore);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(728, 12);
+            this.panel1.Location = new System.Drawing.Point(536, 23);
+            this.panel1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(217, 146);
+            this.panel1.Size = new System.Drawing.Size(267, 93);
             this.panel1.TabIndex = 2;
             // 
             // ctlScore
             // 
             this.ctlScore.AutoSize = true;
-            this.ctlScore.Location = new System.Drawing.Point(137, 70);
+            this.ctlScore.Location = new System.Drawing.Point(115, 25);
+            this.ctlScore.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.ctlScore.Name = "ctlScore";
-            this.ctlScore.Size = new System.Drawing.Size(46, 17);
+            this.ctlScore.Size = new System.Drawing.Size(0, 32);
             this.ctlScore.TabIndex = 1;
-            this.ctlScore.Text = "label2";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 64);
+            this.label1.Location = new System.Drawing.Point(6, 25);
+            this.label1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(46, 17);
+            this.label1.Size = new System.Drawing.Size(97, 32);
             this.label1.TabIndex = 0;
-            this.label1.Text = "label1";
+            this.label1.Text = "Score:";
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(728, 241);
+            this.button2.Location = new System.Drawing.Point(536, 263);
+            this.button2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(217, 51);
+            this.button2.Size = new System.Drawing.Size(267, 84);
             this.button2.TabIndex = 3;
+            this.button2.TabStop = false;
             this.button2.Text = "button2";
             this.button2.UseVisualStyleBackColor = true;
             // 
@@ -104,14 +111,17 @@
             // 
             // TanksForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1012, 682);
+            this.AutoSize = true;
+            this.ClientSize = new System.Drawing.Size(813, 548);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnStartGame);
             this.Controls.Add(this.map);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.KeyPreview = true;
+            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.Name = "TanksForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Tanks";
