@@ -27,8 +27,6 @@ namespace Tanks
         {
             map.Width = 500;
             map.Height = 500;
-
-           
         }
 
         private void btnStartGame_Click(object sender, EventArgs e)
@@ -40,13 +38,13 @@ namespace Tanks
                 newGame = new Game(settings.ApplesCount, settings.TanksCount);
                 switch (settings.Speed)
                 {
-                    case 0: GameStep.Interval = 50;
+                    case 2: GameStep.Interval = 50;
                         break;
                     case 1:
-                        GameStep.Interval = 75;
+                        GameStep.Interval = 60;
                         break;
-                    case 2:
-                        GameStep.Interval = 100;
+                    case 0:
+                        GameStep.Interval = 70;
                         break;
                     default:
                         break;
@@ -56,11 +54,11 @@ namespace Tanks
             {
                 return;
             }
+            ShotsStep.Interval = GameStep.Interval / 2;
             btnStats.Enabled = true;
             newGame.Start(this);
             GameStep.Enabled = true;
-            StatsStep.Interval = GameStep.Interval * 5;
-            StatsStep.Enabled = true;
+            ShotsStep.Enabled = true;
         }
 
         private void GameStep_Tick(object sender, EventArgs e)
@@ -70,6 +68,9 @@ namespace Tanks
             if (newGame.gameOver && newGame.Delta==30)
             {
                 GameStep.Enabled = false;
+                ShotsStep.Enabled = false;
+                StatsStep.Enabled = false;
+                newGame.GameOver();
             }
             
         }
@@ -81,9 +82,17 @@ namespace Tanks
 
         private void btnStats_Click(object sender, EventArgs e)
         {
+            StatsStep.Interval = GameStep.Interval * 6;
+            StatsStep.Enabled = true;
             form = new AboutObjectsForm();
             form.Show();
-            RefreshStats();
+            form.FormClosed += Form_FormClosed;
+            btnStats.Enabled = false;
+        }
+
+        private void Form_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            btnStats.Enabled = true;
         }
 
         private void RefreshStats()
@@ -121,6 +130,11 @@ namespace Tanks
                     RefreshStats();
                 }
             }
+        }
+
+        private void ShotsStep_Tick(object sender, EventArgs e)
+        {
+            newGame.StepOfShots();
         }
     }
 }

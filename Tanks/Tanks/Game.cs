@@ -22,6 +22,7 @@ namespace Tanks
         public int Score { get; protected set; }
         public bool gameOver { get; protected set; } = false;
         public int Delta { get; protected set; } = 30;
+        public int DeltaShots { get; protected set; } = 30;
         private string[] example = {"XXXXXXXXXXXXXXXXXXXX",
                                     "X                  X",
                                     "X       XXXX       X",
@@ -63,6 +64,7 @@ namespace Tanks
             gameOver = false;
             Score = 0;
             Delta = 30;
+            DeltaShots = 30;
             map = fm.map;
             backgroundMap = new Bitmap(map.Width, map.Height);
             mapGraphics = Graphics.FromImage(backgroundMap);
@@ -146,27 +148,22 @@ namespace Tanks
             }
         }
 
-        public void Step()
+        
+
+        public void StepOfShots()
         {
-            
-            while (Delta!= TanksForm.sizeCell + 5)
+            while (DeltaShots != TanksForm.sizeCell + 5)
             {
                 for (int i = 0; i < ShotsKolobok.Count; i++)
                 {
-                    Move(ShotsKolobok[i], Delta);
+                    Move(ShotsKolobok[i], DeltaShots);
                 }
 
                 for (int i = 0; i < ShotsTanks.Count; i++)
                 {
-                    Move(ShotsTanks[i], Delta);
+                    Move(ShotsTanks[i], DeltaShots);
                 }
 
-                Move(kolobok, Delta);
-
-                for (int i = 0; i < Tanks.Count; i++)
-                {
-                    Move(Tanks[i], Delta);
-                }
 
 
                 for (int i = 0; i < Apples.Count; i++)
@@ -174,19 +171,14 @@ namespace Tanks
                     mapGraphics.DrawImage(Apples[i].Img, Apples[i].X * TanksForm.sizeCell, Apples[i].Y * TanksForm.sizeCell, TanksForm.sizeCell, TanksForm.sizeCell);
                 }
 
-                if (gameOver)
-                {
-                    GameOver();
-                }
-
-                Delta += 5;
+                DeltaShots += 5;
                 map.Image = backgroundMap;
                 return;
             }
 
-            kolobok.Move(Walls);
-            Delta = 5;
-            Move(kolobok, Delta);
+          
+            DeltaShots = 5;
+           
 
 
             for (int j = 0; j < ShotsTanks.Count; j++)
@@ -200,12 +192,6 @@ namespace Tanks
 
             for (int i = 0; i < Tanks.Count; i++)
             {
-                if (Tanks[i].CollidesWith(kolobok))
-                {
-                    gameOver = true;
-                    return;
-                }
-                Tanks[i].Move(Walls, Tanks);
                 
                 for (int j = 0; j < ShotsKolobok.Count; j++)
                 {
@@ -213,6 +199,8 @@ namespace Tanks
                     {
                         mapGraphics.FillRectangle(Brushes.Black, Tanks[i].OldX * TanksForm.sizeCell, Tanks[i].OldY * TanksForm.sizeCell, TanksForm.sizeCell, TanksForm.sizeCell);
                         mapGraphics.FillRectangle(Brushes.Black, ShotsKolobok[j].X * TanksForm.sizeCell, ShotsKolobok[j].Y * TanksForm.sizeCell, TanksForm.sizeCell, TanksForm.sizeCell);
+                        mapGraphics.FillRectangle(Brushes.Black, Tanks[i].X * TanksForm.sizeCell, Tanks[i].Y * TanksForm.sizeCell, TanksForm.sizeCell, TanksForm.sizeCell);
+                        mapGraphics.FillRectangle(Brushes.Black, ShotsKolobok[j].OldX * TanksForm.sizeCell, ShotsKolobok[j].OldY * TanksForm.sizeCell, TanksForm.sizeCell, TanksForm.sizeCell);
                         Tanks.RemoveAt(i);
                         ShotsKolobok.RemoveAt(j);
                         i--;
@@ -220,14 +208,7 @@ namespace Tanks
                         break;
                     }
                 }
-
-                
-                if (Tanks[i].CollidesWith(kolobok))
-                {
-                    gameOver = true;
-                    return;
-                }
-                Move(Tanks[i], Delta);
+               
             }
 
 
@@ -267,6 +248,8 @@ namespace Tanks
                     if (Tanks[i].CollidesWith(ShotsKolobok[j]))
                     {
                         mapGraphics.FillRectangle(Brushes.Black, Tanks[i].OldX * TanksForm.sizeCell, Tanks[i].OldY * TanksForm.sizeCell, TanksForm.sizeCell, TanksForm.sizeCell);
+                        mapGraphics.FillRectangle(Brushes.Black, ShotsKolobok[j].X * TanksForm.sizeCell, ShotsKolobok[j].Y * TanksForm.sizeCell, TanksForm.sizeCell, TanksForm.sizeCell);
+                        mapGraphics.FillRectangle(Brushes.Black, Tanks[i].X * TanksForm.sizeCell, Tanks[i].Y * TanksForm.sizeCell, TanksForm.sizeCell, TanksForm.sizeCell);
                         mapGraphics.FillRectangle(Brushes.Black, ShotsKolobok[j].OldX * TanksForm.sizeCell, ShotsKolobok[j].OldY * TanksForm.sizeCell, TanksForm.sizeCell, TanksForm.sizeCell);
                         Tanks.RemoveAt(i);
                         ShotsKolobok.RemoveAt(j);
@@ -277,7 +260,7 @@ namespace Tanks
                 }
             }
 
-           
+
 
             for (int i = 0; i < Apples.Count; i++)
             {
@@ -291,6 +274,52 @@ namespace Tanks
             }
 
             SpawnApples();
+            DeltaShots += 5;
+            map.Image = backgroundMap;
+        }
+
+        public void Step()
+        {
+
+            while (Delta != TanksForm.sizeCell + 5)
+            {
+                
+
+                Move(kolobok, Delta);
+
+                for (int i = 0; i < Tanks.Count; i++)
+                {
+                    Move(Tanks[i], Delta);
+                }
+
+                
+                Delta += 5;
+                map.Image = backgroundMap;
+                return;
+            }
+
+            kolobok.Move(Walls);
+            Delta = 5;
+            Move(kolobok, Delta);
+
+            
+            for (int i = 0; i < Tanks.Count; i++)
+            {
+                if (Tanks[i].CollidesWith(kolobok))
+                {
+                    gameOver = true;
+                    return;
+                }
+                Tanks[i].Move(Walls, Tanks);
+                
+                if (Tanks[i].CollidesWith(kolobok))
+                {
+                    gameOver = true;
+                    return;
+                }
+                Move(Tanks[i], Delta);
+            }
+
             Delta += 5;
             map.Image = backgroundMap;
         }
